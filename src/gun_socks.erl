@@ -23,6 +23,7 @@
 -export([handle/5]).
 -export([closing/4]).
 -export([close/4]).
+-export([down/1]).
 %% @todo down
 
 -record(socks_state, {
@@ -35,6 +36,9 @@
 	version :: 5,
 	status :: auth_method_select | auth_username_password | connect
 }).
+
+down(#socks_state{ref = Ref}) ->
+	[Ref].
 
 check_options(Opts=#{host := _, port := _}) ->
 	do_check_options(maps:to_list(maps:without([host, port], Opts)));
